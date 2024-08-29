@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Learning Game</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        #game-container { max-width: 600px; margin: auto; padding: 20px; }
+        button { margin: 5px; }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <h1>English Learning Game</h1>
+        <button onclick="showVocabulary()">Vocabulary Practice</button>
+        <button onclick="showGrammar()">Grammar Practice</button>
+        <div id="game-content"></div>
+    </div>
+
+    <script>
+        const vocabulary = {
+            'apple': 'A fruit that is typically round and red, green, or yellow.',
+            'book': 'A set of written or printed pages, usually bound with a protective cover.',
+            'cat': 'A small domesticated carnivorous mammal with soft fur.'
+        };
+
+        const grammarSentences = [
+            ['She don\'t like apples.', 'She doesn\'t like apples.'],
+            ['He go to the store.', 'He goes to the store.'],
+            ['They was happy.', 'They were happy.']
+        ];
+
+        function showVocabulary() {
+            const word = getRandomKey(vocabulary);
+            const definition = vocabulary[word];
+            const userAnswer = prompt(`Definition: ${definition}\nWhat is the word?`).trim().toLowerCase();
+            const result = userAnswer === word ? 'Correct!' : `Wrong! The correct word is ${word}.`;
+            document.getElementById('game-content').innerHTML = `<p>${result}</p>`;
+        }
+
+        function showGrammar() {
+            const [sentence, correct] = getRandomElement(grammarSentences);
+            const userAnswer = prompt(`Incorrect Sentence: ${sentence}\nWhat is the correct sentence?`).trim();
+            const result = userAnswer === correct ? 'Correct!' : `Wrong! The correct sentence is: ${correct}`;
+            document.getElementById('game-content').innerHTML = `<p>${result}</p>`;
+        }
+
+        function getRandomKey(obj) {
+            const keys = Object.keys(obj);
+            return keys[Math.floor(Math.random() * keys.length)];
+        }
+
+        function getRandomElement(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+    </script>
+</body>
+</html>
